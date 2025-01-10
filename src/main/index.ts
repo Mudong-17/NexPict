@@ -49,6 +49,11 @@ app.whenReady().then(() => {
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window);
+    if (!is.dev) {
+      window.webContents.on('before-input-event', (event, input) => {
+        if (input.code === 'KeyI' && input.shift && (input.meta || input.control)) event.preventDefault();
+      });
+    }
   });
 
   Object.values(services).forEach((ServiceClass) => {
