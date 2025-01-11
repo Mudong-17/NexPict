@@ -1,0 +1,33 @@
+{
+  "name": "@nexpict/electron-utils",
+  "version": "100.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "check": "biome check --write",
+    "dev": "rslib build --watch",
+    "format": "biome format --write",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.3",
+    "@rslib/core": "^0.3.1",
+    "@types/node": "^22.8.1",
+    "electron": "^33.3.1",
+    "vitest": "^2.1.8"
+  },
+  "private": true
+}

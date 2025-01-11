@@ -5,7 +5,7 @@
 
 ## NexPict 奈图
 
-📷奈图 App—— 超给力的图床上传工具！界面简洁易上手，几步就能将图片飞速上传至云端。更绝的是，它支持自由开发上传插件😎。不管你有啥个性化需求，想对接特殊平台，还是适配独特场景，奈图都放权给你，任你定制专属方案，管理图片超随心。
+📷奈图 —— 超给力的图床上传工具！界面简洁易上手，几步就能将图片飞速上传至云端。更绝的是，它支持自由开发上传插件😎。不管你有啥个性化需求，想对接特殊平台，还是适配独特场景，奈图都放权给你，任你定制专属方案，管理图片超随心。
 
 ## 特色功能
 
@@ -17,8 +17,8 @@
 > esm 模块，目前整体标准不完善，后续会持续更新，让插件开发更简单。
 
 ```typescript
-import { Buffer } from 'buffer';
-import type { UploaderPlugin, Input } from '@nexpict/plugin-core';
+import { Buffer } from "buffer";
+import type { UploaderPlugin, Input } from "@nexpict/plugin-core";
 
 interface SmmsResponse {
   file_id: number;
@@ -36,19 +36,19 @@ interface SmmsResponse {
 
 const SmmsPlugin: UploaderPlugin<Input, SmmsResponse> = {
   metadata: {
-    name: 'SM.MS', // 插件名称
-    version: '0.2.0', // 插件版本
-    description: '上传资源到 SM.MS', // 插件描述
-    author: '暮冬拾柒', // 插件作者
-    type: 'uploader', // 插件类型
+    name: "SM.MS", // 插件名称
+    version: "0.2.0", // 插件版本
+    description: "上传资源到 SM.MS", // 插件描述
+    author: "暮冬拾柒", // 插件作者
+    type: "uploader", // 插件类型
   },
 
   configSchema: {
     // 插件配置
     token: {
-      type: 'input', // 配置类型 input | select | boolean | textarea | number
-      label: 'API Token', // 配置名称
-      description: 'SM.MS API Token', // 配置描述
+      type: "input", // 配置类型 input | select | boolean | textarea | number
+      label: "API Token", // 配置名称
+      description: "SM.MS API Token", // 配置描述
       required: true, // 是否必填
     },
   },
@@ -60,7 +60,7 @@ const SmmsPlugin: UploaderPlugin<Input, SmmsResponse> = {
 
   // 验证配置方法，必须实现
   async validateConfig(config: Record<string, any>): Promise<boolean> {
-    return Boolean(config.token && typeof config.token === 'string');
+    return Boolean(config.token && typeof config.token === "string");
   },
 
   // 生命周期 处理输入前
@@ -83,10 +83,10 @@ const SmmsPlugin: UploaderPlugin<Input, SmmsResponse> = {
   // 生命周期 上传 必须实现 且输出 ctx.output output 需url字段 才能在图册中展示
   async upload(ctx): Promise<void> {
     const formData = new FormData();
-    formData.append('smfile', ctx.input as File);
+    formData.append("smfile", ctx.input as File);
 
-    const response = await fetch('https://sm.ms/api/v2/upload', {
-      method: 'POST',
+    const response = await fetch("https://sm.ms/api/v2/upload", {
+      method: "POST",
       headers: {
         Authorization: this.config.token,
       },
@@ -95,8 +95,8 @@ const SmmsPlugin: UploaderPlugin<Input, SmmsResponse> = {
 
     const result = await response.json();
 
-    if (!response.ok || result.code !== 'success') {
-      throw new Error(result.message || 'Upload failed');
+    if (!response.ok || result.code !== "success") {
+      throw new Error(result.message || "Upload failed");
     }
 
     ctx.output = {
@@ -111,7 +111,7 @@ const SmmsPlugin: UploaderPlugin<Input, SmmsResponse> = {
   // 生命周期 删除资源
   async deleteResource(resourace) {
     await fetch(resourace.delete, {
-      method: 'GET',
+      method: "GET",
     });
   },
 };
