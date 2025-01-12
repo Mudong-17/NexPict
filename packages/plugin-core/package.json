@@ -1,5 +1,5 @@
 {
-  "name": "plugin-core",
+  "name": "@nexpict/plugin-core",
   "version": "1.0.0",
   "type": "module",
   "exports": {
